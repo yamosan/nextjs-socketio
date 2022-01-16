@@ -7,14 +7,20 @@ import { io, Socket } from "socket.io-client";
 const Home: NextPage = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   useEffect(() => {
-    const socketIo = io("http://localhost:5000");
-    setSocket(socketIo);
+    const socket = io("http://localhost:5000", {
+      reconnection: false,
+    });
+    setSocket(socket);
 
-    socketIo.on("connect", () => {
+    socket.on("connect", () => {
       console.log("socket connected");
     });
 
-    socketIo.on("pong", (data) => {
+    socket.on("disconnect", (reason) => {
+      console.log("socket disconnected:", reason);
+    });
+
+    socket.on("pong", (data) => {
       console.log("[pong]", data);
     });
 
