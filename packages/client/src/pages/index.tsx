@@ -3,6 +3,10 @@ import type { NextPage } from "next";
 import { useCallback, useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { io, Socket } from "socket.io-client";
+import type {
+  ClientToServerEvents,
+  ServerToClientEvents,
+} from "@project/common/types/socketIO";
 
 const Home: NextPage = () => {
   const [socket, state] = useSocket();
@@ -63,9 +67,12 @@ const useSocket = (): [Socket, State] => {
 
   const [socket, setSocket] = useState<Socket | null>(null);
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
-      reconnection: false,
-    });
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+      "http://localhost:5000",
+      {
+        reconnection: false,
+      }
+    );
     setSocket(socket);
 
     socket.on("connect", () => {

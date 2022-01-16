@@ -1,12 +1,23 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import type {
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  SocketData,
+} from "@project/common/types/socketIO";
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 const http = createServer(app);
-const io = new Server(http, {
+const io = new Server<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  SocketData
+>(http, {
   // TODO
   cors: {
     origin: "*",
