@@ -1,5 +1,5 @@
 import { memo, VFC } from "react";
-import { Avatar } from "./Avatar";
+import { Avatar } from "../../../../shared/components/Avatar/Avatar";
 
 type Props = {
   name: string;
