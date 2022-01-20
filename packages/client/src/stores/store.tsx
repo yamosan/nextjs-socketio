@@ -6,17 +6,14 @@ type TStoreContext = {
   setUsername: Dispatch<SetStateAction<string>>;
 };
 
-const StoreContext = createContext<TStoreContext>({
-  username: null,
-  setUsername: () => {},
-});
+const StoreContext = createContext<TStoreContext | null>(null);
 
 // Hooks
 export const useStore = () => useContext(StoreContext);
 
 // Provider
 const StoreProvider: React.FC = ({ children }) => {
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>("");
 
   return (
     <StoreContext.Provider value={{ username, setUsername }}>

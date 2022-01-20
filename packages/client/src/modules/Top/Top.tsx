@@ -6,17 +6,12 @@ import { useRouter } from "next/router";
 
 export const Top: NextPage = () => {
   const router = useRouter();
-  const { setUsername } = useStore();
-  const [name, setName] = useState("");
+  const { username, setUsername } = useStore();
 
-  const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setUsername(name);
-      router.push("/messages");
-    },
-    [name]
-  );
+  const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push("/messages");
+  }, []);
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen">
@@ -27,14 +22,14 @@ export const Top: NextPage = () => {
           <input
             type="text"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="px-2 border-2 border-gray-400 rounded"
           />
         </div>
         <button
           type="submit"
-          disabled={!name}
+          disabled={!username}
           className="mt-4 mx-auto block px-3 py-1 bg-blue-500 text-white rounded disabled:opacity-50"
         >
           参加する
