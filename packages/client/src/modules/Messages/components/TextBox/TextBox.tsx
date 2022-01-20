@@ -25,8 +25,9 @@ export const TextBox: VFC<Props> = (props) => {
       <button
         className="flex items-center justify-center rounded-full h-full px-8 rotate-90 outline-0 group"
         onClick={handleClick}
+        disabled={value === ""}
       >
-        <PaperAirplaneIcon className="w-8 h-8 text-indigo-400 transition hover:-rotate-12 group-focus:-rotate-12" />
+        <PaperAirplaneIcon className="w-8 h-8 text-indigo-400 transition hover:-rotate-12 group-focus:-rotate-12 group-disabled:rotate-0 group-disabled:opacity-50" />
       </button>
     </div>
   );
