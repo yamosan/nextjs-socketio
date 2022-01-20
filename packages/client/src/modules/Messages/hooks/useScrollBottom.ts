@@ -22,10 +22,10 @@ export const useScrollBottom = (containerRef: RefObject<HTMLElement>) => {
         if (timeoutId) clearTimeout(timeoutId);
         timeoutId = setTimeout(onScroll, 200);
       };
-      containerRef.current.addEventListener("scroll", onScrollDebounce);
+      containerRef.current?.addEventListener("scroll", onScrollDebounce);
 
       return () => {
-        containerRef.current.removeEventListener("scroll", onScrollDebounce);
+        containerRef.current?.removeEventListener("scroll", onScrollDebounce);
       };
     }
   }, [containerRef]);
