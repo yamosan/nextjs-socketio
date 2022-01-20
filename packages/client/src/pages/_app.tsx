@@ -2,7 +2,7 @@ import "../styles/global.css";
 
 import type { AppProps } from "next/app";
 import StoreProvider from "../stores/store";
-import { Layout } from "../shared/components/layout/Layout";
+import { Layout } from "../shared/components/Layout/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

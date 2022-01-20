@@ -16,6 +16,7 @@ export const Top: NextPage = () => {
   return (
     <div className="flex flex-col justify-center items-center h-full">
       <h1 className="text-2xl font-bold mb-4">Top Page</h1>
+      
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-start">
           <label className="text-xs block text-gray-600">名前</label>
