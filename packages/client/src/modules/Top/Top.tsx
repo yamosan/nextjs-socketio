@@ -22,6 +22,7 @@ export const Top: NextPage = () => {
           <input
             type="text"
             name="name"
+            maxLength={20}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="px-2 border-2 border-gray-400 rounded"
