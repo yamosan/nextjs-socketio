@@ -14,7 +14,7 @@ export const Top: NextPage = () => {
   }, []);
 
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen">
+    <div className="flex flex-col justify-center items-center h-full">
       <h1 className="text-2xl font-bold mb-4">Top Page</h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-start">
@@ -35,6 +35,6 @@ export const Top: NextPage = () => {
           参加する
         </button>
       </form>
-    </main>
+    </div>
   );
 };
