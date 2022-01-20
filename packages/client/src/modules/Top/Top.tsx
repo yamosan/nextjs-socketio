@@ -1,18 +1,22 @@
 import type { NextPage } from "next";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import type { FormEvent } from "react";
+import { useStore } from "../../stores/store";
+import { useRouter } from "next/router";
 
-// 名前とアイコン設定して、ユーザーを作成する画面
-// グローバルステイトを登録
 export const Top: NextPage = () => {
-  const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const router = useRouter();
+  const { setUsername } = useStore();
+  const [name, setName] = useState("");
 
-    const target = e.currentTarget as typeof e.currentTarget & {
-      name: { value: string };
-    };
-    console.log({ name: target.name.value });
-  }, []);
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setUsername(name);
+      router.push("/messages");
+    },
+    [name]
+  );
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen">
@@ -23,12 +27,15 @@ export const Top: NextPage = () => {
           <input
             type="text"
             name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="px-2 border-2 border-gray-400 rounded"
           />
         </div>
         <button
           type="submit"
-          className="mt-4 mx-auto block px-3 py-1 bg-blue-500 text-white rounded"
+          disabled={!name}
+          className="mt-4 mx-auto block px-3 py-1 bg-blue-500 text-white rounded disabled:opacity-50"
         >
           参加する
         </button>
