@@ -11,7 +11,10 @@ export const useScrollBottom = (containerRef: RefObject<HTMLElement>) => {
   useEffect(() => {
     if (containerRef.current) {
       const onScroll = () => {
-        if (containerRef.current.scrollHeight - containerRef.current.clientHeight === containerRef.current.scrollTop) {
+        if (
+          containerRef.current?.scrollHeight - containerRef.current?.clientHeight ===
+          containerRef.current?.scrollTop
+        ) {
           setIsBottom(true);
         }
       };
