@@ -11,7 +11,7 @@ generator client {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
+  id        String    @id
   name      String
   avatarUrl String
   messages  Message[]
@@ -22,5 +22,5 @@ model Message {
   content   String
   createdAt DateTime @default(now())
   sender    User     @relation(fields: [senderId], references: [id])
-  senderId  Int
+  senderId  String
 }

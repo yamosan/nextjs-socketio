@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "avatarUrl" TEXT NOT NULL,
 
@@ -11,7 +11,8 @@ CREATE TABLE "User" (
 CREATE TABLE "Message" (
     "id" SERIAL NOT NULL,
     "content" TEXT NOT NULL,
-    "senderId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "senderId" TEXT NOT NULL,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );
