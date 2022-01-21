@@ -1,14 +1,10 @@
 import { Dispatch, SetStateAction, useReducer } from "react";
 import { createContext, useContext, useState } from "react";
 
-type Avatar = {
-  src: string;
-  alt: string;
-};
 
 type User = {
   name: string;
-  avatar: Avatar;
+  avatarUrl: string;
 };
 
 type TStore = {

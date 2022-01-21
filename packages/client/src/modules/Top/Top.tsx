@@ -21,7 +21,7 @@ export const Top: NextPage = () => {
       payload: {
         user: {
           name: username,
-          avatar: { src: emoji.src, alt: emoji.name },
+          avatarUrl: emoji.src,
         },
       },
     });
