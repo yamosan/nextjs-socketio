@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import type {
@@ -11,10 +12,11 @@ import { prisma } from "./lib/prisma";
 
 const PORT = process.env.PORT || 5000;
 
+// TODO: cors
 const app = express();
+app.use(cors());
 const http = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(http, {
-  // TODO
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
