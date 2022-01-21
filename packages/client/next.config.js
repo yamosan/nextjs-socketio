@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["i.pravatar.cc"],
+    domains: ["github.githubassets.com"],
   },
 };
