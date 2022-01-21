@@ -31,7 +31,7 @@ export const Top: NextPage = () => {
   if (loading) return null;
   return (
     <div className="flex flex-col justify-center items-center h-full">
-      <h1 className="text-2xl font-bold mb-6">Set up your profile</h1>
+      <h1 className="text-2xl text-gray-800 font-bold mb-6">Set up your profile</h1>
 
       <div className="relative mb-4">
         {emoji && <Avatar src={emoji.src} size={96} alt={emoji.name} />}

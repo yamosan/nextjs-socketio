@@ -15,7 +15,7 @@ const _Card: VFC<Props> = ({ name, content, avatarUrl }) => {
       </div>
       <div className="min-w-0">
         <span className="text-sm text-gray-400">{name}</span>
-        <p className="mt-2 text-base break-words">{content}</p>
+        <p className="mt-2 text-base break-words text-gray-800">{content}</p>
       </div>
     </div>
   );
