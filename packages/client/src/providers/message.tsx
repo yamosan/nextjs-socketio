@@ -32,7 +32,7 @@ const MessageProvider: React.VFC<{
   const [socket, setSocket] = useState<IO | null>(null);
 
   useEffect(() => {
-    const socket: IO = io("http://localhost:5000", {
+    const socket: IO = io(process.env.NEXT_PUBLIC_WS_HOST, {
       reconnection: false,
     });
     setSocket(socket);
