@@ -1,3 +1,4 @@
+import dotenvFlow from "dotenv-flow";
 import { Server } from "socket.io";
 import type {
   ClientToServerEvents,
@@ -6,6 +7,8 @@ import type {
   SocketData,
 } from "@project/common/types/lib/socketIO";
 import { prisma } from "./lib/prisma";
+
+dotenvFlow.config();
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>({
   cors: {
