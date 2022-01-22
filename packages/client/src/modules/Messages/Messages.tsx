@@ -18,8 +18,8 @@ export const Messages: NextPage = () => {
 
   return (
     <div className="relative h-full">
-      <div className="h-full overflow-y-auto pt-12 pb-36" ref={containerRef}>
-        <div className="max-w-app mx-auto flex flex-col-reverse space-y-reverse space-y-7">
+      <div className="h-full overflow-y-auto pt-6 sm:pt-12 pb-28 sm:pb-36" ref={containerRef}>
+        <div className="max-w-app w-11/12 mx-auto flex flex-col-reverse space-y-reverse space-y-7">
           {!loading &&
             [...messages]
               .reverse()
@@ -29,7 +29,7 @@ export const Messages: NextPage = () => {
         </div>
       </div>
       <div className="absolute bottom-0 w-full">
-        <div className="max-w-app mx-auto mb-8">
+        <div className="max-w-app mx-auto sm:w-11/12 sm:mb-8">
           <TextBox onSubmit={(content) => sendMessage(content, state.user)} />
         </div>
       </div>
