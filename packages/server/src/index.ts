@@ -1,6 +1,3 @@
-import express from "express";
-import cors from "cors";
-import { createServer } from "http";
 import { Server } from "socket.io";
 import type {
   ClientToServerEvents,
@@ -10,15 +7,9 @@ import type {
 } from "@project/common/types/lib/socketIO";
 import { prisma } from "./lib/prisma";
 
-const PORT = process.env.PORT || 5000;
-
-// TODO: cors
-const app = express();
-app.use(cors());
-const http = createServer(app);
-const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(http, {
+const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>({
   cors: {
-    origin: "*",
+    origin: process.env.FRONTEND_HOST,
     methods: ["GET", "POST"],
   },
 });
@@ -69,4 +60,4 @@ io.on("connection", async (socket) => {
   });
 });
 
-http.listen(PORT);
+io.listen(5000);
