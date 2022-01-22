@@ -32,7 +32,7 @@ export const Top: NextPage = () => {
       <h1 className="text-2xl text-gray-800 font-bold mb-6">Set up your profile</h1>
 
       <div className="relative mb-4">
-        {emoji && <Avatar src={emoji.src} size={96} alt={emoji.name} />}
+        <Avatar src={emoji.src} size={96} alt={emoji.name} />
         <button type="button" onClick={update} className="absolute -right-0.5 -bottom-0.5 text-indigo-400">
           <RefreshIcon className="w-6 h-6" />
         </button>

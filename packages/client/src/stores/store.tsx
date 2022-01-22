@@ -1,10 +1,6 @@
-import { Dispatch, useReducer } from "react";
-import { createContext, useContext } from "react";
-
-type User = {
-  name: string;
-  avatarUrl: string;
-};
+import type { Dispatch } from "react";
+import { createContext, useContext, useReducer } from "react";
+import type { User } from "@project/common/types/types";
 
 type TStore = {
   user: User | null;

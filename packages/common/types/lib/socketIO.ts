@@ -1,4 +1,4 @@
-import type { Message } from "../types";
+import type { Message, User } from "../types";
 
 export interface ServerToClientEvents {
   init: (messages: Message[]) => void;
@@ -6,7 +6,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
-  send_message: (content: string, sender: { avatarUrl: string; name: string }) => void;
+  send_message: (content: Message["content"], sender: Pick<User, "name" | "avatarUrl">) => void;
 }
 
 export interface InterServerEvents {}

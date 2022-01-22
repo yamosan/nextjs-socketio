@@ -1,4 +1,4 @@
-import { Message } from "@project/common/types/types";
+import type { Message } from "@project/common/types/types";
 import { createContext, useContext, useMemo, useEffect, useState, useCallback } from "react";
 import type { ReactNode } from "react";
 import { io, Socket } from "socket.io-client";
