@@ -37,7 +37,6 @@ export const Top: NextPage = () => {
           <label className="text-xs block text-gray-400">name</label>
           <input
             type="text"
-            name="name"
             maxLength={20}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
