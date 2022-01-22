@@ -18,7 +18,15 @@ export const Layout: VFC<Props> = ({ children }) => {
               <h1 className="text-2xl font-bold text-gray-800">Chat</h1>
             </a>
           </Link>
-          <div>{state.user && <Avatar src={state.user.avatarUrl} size={32} alt={state.user.name} />}</div>
+          <div>
+            {state.user && (
+              <Link href="/messages">
+                <a>
+                  <Avatar src={state.user.avatarUrl} size={32} alt={state.user.name} />
+                </a>
+              </Link>
+            )}
+          </div>
         </div>
       </header>
       <main className="pt-16 h-full">{children}</main>
