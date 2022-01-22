@@ -7,7 +7,7 @@ import type {
   ServerToClientEvents,
   InterServerEvents,
   SocketData,
-} from "@project/common/types/socketIO";
+} from "@project/common/types/lib/socketIO";
 import { prisma } from "./lib/prisma";
 
 const PORT = process.env.PORT || 5000;
@@ -23,31 +23,46 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
   },
 });
 
-app.get("/messages", async (req, res) => {
-  const messages = await prisma.message.findMany({
-    orderBy: { createdAt: "asc" },
+const MESSAGE_SELECT = {
+  id: true,
+  content: true,
+  createdAt: true,
+  sender: {
     select: {
       id: true,
-      content: true,
-      createdAt: true,
-      sender: {
-        select: {
-          id: true,
-          name: true,
-          avatarUrl: true,
+      name: true,
+      avatarUrl: true,
+    },
+  },
+};
+
+io.on("connection", async (socket) => {
+  console.log(`[${socket.id}] connected`);
+  const prevMessages = await prisma.message.findMany({
+    orderBy: { createdAt: "asc" },
+    select: MESSAGE_SELECT,
+  });
+  console.log(prevMessages);
+  socket.emit("init", prevMessages);
+
+  socket.on("send_message", async (content, sender) => {
+    const message = await prisma.message.create({
+      data: {
+        content,
+        sender: {
+          connectOrCreate: {
+            where: { id: socket.id },
+            create: {
+              id: socket.id,
+              name: sender.name,
+              avatarUrl: sender.avatarUrl,
+            },
+          },
         },
       },
-    },
-  });
-  res.json(messages);
-});
-
-io.on("connection", (socket) => {
-  console.log(`[${socket.id}] connected`);
-
-  socket.on("send", (data) => {
-    console.log(`[send]: ${data} @${socket.id}`);
-    io.emit("receive", { ...data, senderId: socket.id });
+      select: MESSAGE_SELECT,
+    });
+    io.emit("new_message", message);
   });
 
   socket.on("disconnect", () => {
