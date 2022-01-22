@@ -6,7 +6,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
-  send_message: (content: string) => void;
+  send_message: (content: string, sender: { avatarUrl: string; name: string }) => void;
 }
 
 export interface InterServerEvents {}
