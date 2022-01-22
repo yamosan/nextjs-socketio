@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useStore } from "../../stores/store";
+import { useUser } from "../../providers/user";
 import { useRouter } from "next/router";
 import { Avatar } from "../../shared/components/Avatar";
 import { RefreshIcon } from "@heroicons/react/outline";
@@ -9,20 +9,14 @@ import { useRandomEmojiUrl } from "./hooks/useRandomEmojiUrl";
 
 export const Top: NextPage = () => {
   const router = useRouter();
-  const { dispatch } = useStore();
+  const { signin } = useUser();
   const { loading, emoji, update } = useRandomEmojiUrl();
   const [username, setUsername] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch({
-      type: "signin",
-      payload: {
-        name: username,
-        avatarUrl: emoji.src,
-      },
-    });
+    signin(username, emoji.src);
     router.push("/messages");
   };
 

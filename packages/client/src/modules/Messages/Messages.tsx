@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useRef } from "react";
-import { useMessage } from "../../stores/message";
-import { useStore } from "../../stores/store";
+import { useMessage } from "../../providers/message";
+import { useUser } from "../../providers/user";
 import { Card } from "./components/Card/Card";
 import { TextBox } from "./components/TextBox";
 import { useScrollBottom } from "./hooks/useScrollBottom";
@@ -9,7 +9,7 @@ import { useScrollBottom } from "./hooks/useScrollBottom";
 export const Messages: NextPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { isBottom, scrollBottom } = useScrollBottom(containerRef);
-  const { state } = useStore();
+  const { user } = useUser();
   const { loading, messages, sendMessage } = useMessage();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const Messages: NextPage = () => {
       </div>
       <div className="absolute bottom-0 w-full">
         <div className="max-w-app mx-auto sm:w-11/12 sm:mb-8">
-          <TextBox onSubmit={(content) => sendMessage(content, state.user)} />
+          <TextBox onSubmit={(content) => sendMessage(content, user)} />
         </div>
       </div>
     </div>

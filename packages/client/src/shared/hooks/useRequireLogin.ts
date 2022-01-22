@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useStore } from "../../stores/store";
+import { useUser } from "../../providers/user";
 
 export const useRequireLogin = () => {
-  const { state } = useStore();
+  const { user } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!state.user) {
+    if (!user) {
       router.push("/");
     }
-  }, [state.user]);
+  }, [user]);
 };
