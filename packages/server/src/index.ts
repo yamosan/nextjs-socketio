@@ -42,7 +42,6 @@ io.on("connection", async (socket) => {
     orderBy: { createdAt: "asc" },
     select: MESSAGE_SELECT,
   });
-  console.log(prevMessages);
   socket.emit("init", prevMessages);
 
   socket.on("send_message", async (content, sender) => {
