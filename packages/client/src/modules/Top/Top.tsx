@@ -19,10 +19,8 @@ export const Top: NextPage = () => {
     dispatch({
       type: "signin",
       payload: {
-        user: {
-          name: username,
-          avatarUrl: emoji.src,
-        },
+        name: username,
+        avatarUrl: emoji.src,
       },
     });
     router.push("/messages");

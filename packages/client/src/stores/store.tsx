@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction, useReducer } from "react";
-import { createContext, useContext, useState } from "react";
-
+import { Dispatch, useReducer } from "react";
+import { createContext, useContext } from "react";
 
 type User = {
   name: string;
@@ -15,12 +14,12 @@ const initialStore: TStore = {
   user: null,
 };
 
-type TAction = { type: "signin"; payload: { user: User } };
+type TAction = { type: "signin"; payload: { name: string; avatarUrl: string } };
 
 const reducer: React.Reducer<TStore, TAction> = (state, action) => {
   switch (action.type) {
     case "signin":
-      return { ...action.payload };
+      return { ...state, user: { ...action.payload } };
     default:
       return state;
   }

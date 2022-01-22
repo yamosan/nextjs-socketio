@@ -3,14 +3,21 @@ import { useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "react-textarea-autosize";
 
-const _TextBox: VFC = () => {
+type Props = {
+  onSubmit: (content: string) => void;
+};
+
+const _TextBox: VFC<Props> = ({ onSubmit }) => {
   const [value, setValue] = useState("");
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.blur();
-    setValue("");
-    // TODO: send message
-  }, []);
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.currentTarget.blur();
+      onSubmit(value);
+      setValue("");
+    },
+    [value]
+  );
 
   return (
     <div className="flex items-center bg-white rounded-2xl overflow-hidden shadow-sm shadow-gray-200 min-h-[80px] h-max">
