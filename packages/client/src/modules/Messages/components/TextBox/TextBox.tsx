@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC } from "react";
+import { memo, useCallback, useRef, VFC } from "react";
 import { useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
 import TextareaAutosize from "react-textarea-autosize";
@@ -9,15 +9,14 @@ type Props = {
 
 const _TextBox: VFC<Props> = ({ onSubmit }) => {
   const [value, setValue] = useState("");
-
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.currentTarget.blur();
-      onSubmit(value);
-      setValue("");
-    },
-    [value]
-  );
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const handleClick = useCallback(() => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+    onSubmit(value);
+    setValue("");
+  }, [value]);
 
   return (
     <div className="flex items-center bg-white rounded-2xl overflow-hidden shadow-sm shadow-gray-200 min-h-[80px] h-max">
@@ -26,6 +25,12 @@ const _TextBox: VFC<Props> = ({ onSubmit }) => {
         maxLength={1000}
         placeholder="Write a message..."
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+            handleClick();
+          }
+        }}
+        ref={ref}
         className="h-full w-full outline-none px-12 py-5 break-words resize-none overflow-auto"
       />
 
